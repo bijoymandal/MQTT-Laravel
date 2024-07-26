@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "jquery": "^3.7.1",
-        "lucide": "^0.411.0"
+        "lucide": "^0.411.0",
+        "mqtt": "^5.9.0"
     }
 }

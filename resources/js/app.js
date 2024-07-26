@@ -5,6 +5,7 @@ import Alpine from 'alpinejs';
 import $ from 'jquery';
 window.$ = window.jQuery = $;
 window.Alpine = Alpine;
+import mqtt from 'mqtt';
 
 Alpine.start();
 
@@ -39,26 +40,26 @@ $(document).ready(function() {
 
 
 // Side menu tooltips
-var initTooltips = function tooltips() {
-    $(".side-menu").each(function () {
-        if (this._tippy == undefined) {
-            var content = $(this).find(".side-menu__title").html().replace(/<[^>]*>?/gm, "").trim();
-            (0, tippy_js__WEBPACK_IMPORTED_MODULE_0__["default"])(this, {
-                content: content,
-                arrow: tippy_js__WEBPACK_IMPORTED_MODULE_0__.roundArrow,
-                animation: "shift-away",
-                placement: "right"
-            });
-        }
+// var initTooltips = function tooltips() {
+//     $(".side-menu").each(function () {
+//         if (this._tippy == undefined) {
+//             var content = $(this).find(".side-menu__title").html().replace(/<[^>]*>?/gm, "").trim();
+//             (0, tippy_js__WEBPACK_IMPORTED_MODULE_0__["default"])(this, {
+//                 content: content,
+//                 arrow: tippy_js__WEBPACK_IMPORTED_MODULE_0__.roundArrow,
+//                 animation: "shift-away",
+//                 placement: "right"
+//             });
+//         }
 
-        if ($(window).width() <= 1260 || $(this).closest(".side-nav").hasClass("side-nav--simple")) {
-            this._tippy.enable();
-        } else {
-            this._tippy.disable();
-        }
-    });
-    return tooltips;
-}();
+//         if ($(window).width() <= 1260 || $(this).closest(".side-nav").hasClass("side-nav--simple")) {
+//             this._tippy.enable();
+//         } else {
+//             this._tippy.disable();
+//         }
+//     });
+//     return tooltips;
+// }();
 
 window.addEventListener("resize", function () {
     initTooltips();
@@ -80,3 +81,45 @@ $(".dark-mode-switcher").on("click", function () {
         window.location.href = link;
     }, 500);
 });
+
+
+
+const options = {
+    clientId: 'emqx_cloude5a3b5',
+    username: 'pavan',
+    password: 'pavan',
+    keepalive: 60,
+    clean: true, // equivalent to Clean Start
+    reconnectPeriod: 1000, // reconnect after 1 second if disconnected
+    protocolVersion: 4, // Use MQTT version 4 (3.1.1)
+};
+
+// WebSocket URL
+const websocketURL = `wss://uaf2d772.ala.eu-central-1.emqxsl.com:8084/mqtt`;
+
+// Create an MQTT client
+const client = mqtt.connect(websocketURL, options);
+
+// initialize the MQTT client
+// var client = mqtt.connect(options);
+
+// setup the callbacks
+client.on('connect', function () {
+    console.log('Connected');
+});
+
+client.on('error', function (error) {
+    console.log(error);
+});
+
+client.on('message', function (topic, message) {
+    // called each time a message is received
+    console.log('Received message:', topic, message.toString());
+});
+
+// subscribe to topic 'my/test/topic'
+client.subscribe('my/test/topic');
+
+// publish message 'Hello' to topic 'my/test/topic'
+client.publish('my/test/topic', 'Hello');
+
