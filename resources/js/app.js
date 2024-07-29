@@ -61,9 +61,9 @@ $(document).ready(function() {
 //     return tooltips;
 // }();
 
-window.addEventListener("resize", function () {
-    initTooltips();
-});
+// window.addEventListener("resize", function () {
+//     initTooltips();
+// });
 
 //Dark Mode
 

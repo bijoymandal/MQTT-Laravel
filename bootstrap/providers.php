@@ -2,5 +2,7 @@
 
 return [
     App\Providers\AppServiceProvider::class,
-    Spatie\Permission\PermissionServiceProvider::class
+    App\Providers\MQTTServiceProvider::class,
+    Spatie\Permission\PermissionServiceProvider::class,
+
 ];
