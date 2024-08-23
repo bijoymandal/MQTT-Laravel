@@ -56,6 +56,7 @@
                 {{ $slot }}
             </main>
         </div> --}}
+        <script src="{{asset('js/webpackCustom.js')}}"></script>
         @stack('scripts')
     </body>
 </html>

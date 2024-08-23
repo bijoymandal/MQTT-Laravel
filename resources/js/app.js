@@ -12,6 +12,7 @@ Alpine.start();
 createIcons({ icons });
 
 $(document).ready(function() {
+    // console.log(dom);
     console.log('jQuery is ready!');
 });
 
@@ -36,7 +37,14 @@ $(document).ready(function() {
             }
         }
     });
+
 })();
+
+
+function dom(dom)
+{
+
+}
 
 
 // Side menu tooltips
