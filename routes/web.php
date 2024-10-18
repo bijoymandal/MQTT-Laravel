@@ -5,7 +5,9 @@ use App\Http\Controllers\MqttController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
-    return view('pages.index');
+    // return view('pages.index');
+    return view('welcome');
+
 });
 
 Route::get('/dashboard', function () {

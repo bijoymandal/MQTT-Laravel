@@ -38,6 +38,38 @@ $(document).ready(function() {
         }
     });
 
+    //dark Mode
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+    const htmlElement = document.documentElement;
+
+    // Function to apply the theme
+    function applyTheme(theme) {
+        if (theme === 'dark') {
+            htmlElement.classList.add('dark');
+            moonIcon.classList.remove('hidden-toggle');
+            sunIcon.classList.add('hidden-toggle');
+        } else {
+            htmlElement.classList.remove('dark');
+            moonIcon.classList.add('hidden-toggle');
+            sunIcon.classList.remove('hidden-toggle');
+        }
+    }
+
+    // Check for existing theme in localStorage and apply it
+    const savedTheme = localStorage.getItem('theme') || 'light'; // Default to light if no theme is set
+    applyTheme(savedTheme);
+
+    // Add event listener to toggle between themes
+    themeToggleBtn.addEventListener('click', () => {
+        const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        // Apply the new theme and store it in localStorage
+        applyTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
+    });
 })();
 
 
@@ -72,24 +104,6 @@ function dom(dom)
 // window.addEventListener("resize", function () {
 //     initTooltips();
 // });
-
-//Dark Mode
-
-$(".dark-mode-switcher").on("click", function () {
-    var switcher = $(this).find(".dark-mode-switcher__toggle");
-
-    if ($(switcher).hasClass("dark-mode-switcher__toggle--active")) {
-        $(switcher).removeClass("dark-mode-switcher__toggle--active");
-    } else {
-        $(switcher).addClass("dark-mode-switcher__toggle--active");
-    }
-
-    setTimeout(function () {
-        var link = $(".dark-mode-switcher").data("url");
-        window.location.href = link;
-    }, 500);
-});
-
 
 
 const options = {
